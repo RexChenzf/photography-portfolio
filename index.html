@@ -3,95 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的摄影作品 - 个人作品集</title>
+    <title>Yan Ming - Photography</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style type="text/css">
+        /* Yan Ming 风格基础 */
+        body {
+            font-size: 12px;
+            font-family: Arial, sans-serif;
+            background: #fff;
+            color: #666;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">📷 我的摄影</div>
-            <ul class="nav-links">
-                <li><a href="#home">首页</a></li>
-                <li><a href="#gallery">作品</a></li>
-                <li><a href="#about">关于</a></li>
-                <li><a href="#contact">联系</a></li>
-            </ul>
+    <!-- 左侧菜单 -->
+    <div id="menu">
+        <div class="title">
+            <img src="images/avatar.jpg" width="55" height="55" alt="Avatar" onerror="this.style.display='none'">
+            <p><a href=".">Yan Ming</a></p>
         </div>
-    </nav>
-
-    <!-- 首页横幅 -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>用镜头记录美好瞬间</h1>
-            <p>欢迎来到我的摄影世界</p>
-            <a href="#gallery" class="btn">浏览作品</a>
-        </div>
-    </section>
-
-    <!-- 作品画廊 - 动态加载 images/ 目录 -->
-    <section id="gallery" class="gallery">
+        <ul>
+            <li><a href="#home" class="active">首页</a></li>
+            <li><a href="#gallery">作品</a></li>
+            <li><a href="#about">关于</a></li>
+        </ul>
+        <p class="links"><a href="#links">Links</a></p>
+    </div>
+    
+    <!-- 主内容区 -->
+    <div id="content">
         <div class="container">
-            <h2 class="section-title">精选作品</h2>
-            <div class="masonry-grid" id="photoGrid">
-                <!-- 图片由 JS 动态加载 -->
+            <!-- 幻灯片容器 -->
+            <div id="slideshow">
+                <!-- 图片动态加载到这里 -->
+            </div>
+            
+            <!-- 导航按钮 -->
+            <div class="slide-nav">
+                <a href="#" id="prev">‹</a>
+                <a href="#" id="next">›</a>
             </div>
         </div>
-    </section>
-
-    <!-- 关于我 -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">关于我</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>你好！我是一名摄影爱好者，热爱用镜头捕捉生活中的美好瞬间。</p>
-                    <p>从自然风光到城市街景，从人像摄影到微距世界，我试图通过照片讲述每一个独特的故事。</p>
-                    <p>摄影对我来说不仅是爱好，更是一种表达方式和观察世界的角度。</p>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">年摄影经验</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">作品数量</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">拍摄地点</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 联系方式 -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">联系我</h2>
-            <div class="contact-content">
-                <p>欢迎与我交流摄影心得，或合作拍摄项目</p>
-                <div class="contact-links">
-                    <a href="mailto:your-email@example.com" class="contact-btn">📧 发送邮件</a>
-                    <a href="#" class="contact-btn">📱 微信</a>
-                    <a href="#" class="contact-btn">📷 Instagram</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 我的摄影作品. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    </div>
+    
+    <script src="https://www.yanming.im/ndxz-studio/site/js/jquery.js"></scr" + "ipt>
+    <script src="script.js"></scr" + "ipt>
 </body>
 </html>

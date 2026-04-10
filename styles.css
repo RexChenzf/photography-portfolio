@@ -1,4 +1,9 @@
-/* 全局样式 */
+/**
+ * Yan Ming 风格摄影网站
+ * 极简黑白设计 + 左侧导航 + 幻灯片展示
+ */
+
+/* ===== 基础重置 ===== */
 * {
     margin: 0;
     padding: 0;
@@ -6,360 +11,163 @@
 }
 
 body {
-    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #666;
     line-height: 1.6;
-    color: #333;
-    overflow-x: hidden;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* 导航栏 */
-.navbar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 1rem 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #333;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-links a {
+a {
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: #667eea;
-}
-
-/* 首页横幅 */
-.hero {
-    height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    padding-top: 60px;
-}
-
-.hero-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.hero-content p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-}
-
-.btn {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: white;
-    color: #667eea;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* 章节标题 */
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #333;
-    position: relative;
-}
-
-.section-title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    margin: 1rem auto 0;
-    border-radius: 2px;
-}
-
-/* 作品画廊 - 瀑布流布局 */
-.gallery {
-    padding: 100px 0;
-    background: #f8f9fa;
-}
-
-/* 瀑布流网格 */
-.masonry-grid {
-    column-count: 3;
-    column-gap: 1.5rem;
-}
-
-@media (max-width: 900px) {
-    .masonry-grid {
-        column-count: 2;
-    }
-}
-
-@media (max-width: 600px) {
-    .masonry-grid {
-        column-count: 1;
-    }
-}
-
-/* 照片卡片 */
-.photo-card {
-    break-inside: avoid;
-    margin-bottom: 1.5rem;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.photo-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* 图片/视频容器 */
-.photo-media-wrapper {
-    position: relative;
-    width: 100%;
-    background: #f0f0f0;
-}
-
-.photo-media {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.photo-fallback {
-    width: 100%;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
     color: #999;
 }
 
-.photo-info {
-    padding: 1rem;
+a:hover {
+    color: #666;
 }
 
-.photo-info h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-    color: #333;
+a img {
+    border: none;
 }
 
-.photo-info p {
-    color: #777;
-    font-size: 0.9rem;
+/* ===== 左侧菜单 ===== */
+#menu {
+    width: 210px;
+    padding-left: 10px;
+    overflow: auto;
+    text-align: left;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 100;
 }
 
-/* 视频样式 */
-video.photo-media {
+.title {
+    padding: 20px 5px 20px 5px;
+    font-size: 22px;
+}
+
+.title img {
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.title a {
+    color: #000;
+}
+
+#menu ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+}
+
+#menu ul li {
+    padding-left: 10px;
+    list-style-type: none;
+}
+
+#menu ul li a {
+    color: #999;
+}
+
+#menu ul li a.active,
+#menu ul li a:hover {
+    color: #2cb4e6; /* Yan Ming青色 */
+}
+
+.links {
+    padding-left: 10px;
+    margin-top: 50px;
+    font-size: 11px;
+}
+
+/* ===== 主内容区 ===== */
+#content {
+    margin-left: 215px;
+    padding: 20px 50px 25px 5px;
+    min-height: 100vh;
+}
+
+.container {
+    position: relative;
+}
+
+/* ===== 幻灯片 ===== */
+#slideshow {
     width: 100%;
+    max-width: 800px;
+    position: relative;
+}
+
+.slide-img {
+    display: none;
+    max-width: 100%;
     height: auto;
 }
 
-/* 关于我 */
-.about {
-    padding: 100px 0;
-    background: white;
-}
-
-.about-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.about-text p {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    color: #555;
-    line-height: 1.8;
-}
-
-.stats {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 3rem;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
-.stat-item {
-    text-align: center;
-}
-
-.stat-number {
+.slide-img:first-child {
     display: block;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #667eea;
-    margin-bottom: 0.5rem;
 }
 
-.stat-label {
-    color: #666;
-    font-size: 1rem;
+/* ===== 导航按钮 ===== */
+.slide-nav {
+    margin-top: 20px;
 }
 
-/* 联系方式 */
-.contact {
-    padding: 100px 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-}
-
-.contact .section-title {
-    color: white;
-}
-
-.contact .section-title::after {
-    background: white;
-}
-
-.contact-content {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-}
-
-.contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.contact-btn {
+.slide-nav a {
     display: inline-block;
-    padding: 1rem 2rem;
-    background: white;
-    color: #667eea;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.contact-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* 页脚 */
-.footer {
-    background: #2c3e50;
-    color: white;
-    padding: 2rem 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
+    font-size: 24px;
+    color: #999;
+    background: #f5f5f5;
+    margin-right: 5px;
 }
 
-.footer p {
-    opacity: 0.8;
+.slide-nav a:hover {
+    background: #eee;
+    color: #333;
 }
 
-/* 响应式设计 */
+/* ===== Footer ===== */
+#footer {
+    margin-top: 50px;
+    padding-top: 20px,
+    border-top: 1px solid #eee;
+    font-size: 11px;
+    color: #999;
+}
+
+#footer a {
+    color: #999;
+}
+
+/* ===== 响应式 ===== */
 @media (max-width: 768px) {
-    .nav-links {
-        gap: 1rem;
+    #menu {
+        width: 100%;
+        position: relative;
+        padding: 10px;
+        text-align: center;
     }
-
-    .hero-content h1 {
-        font-size: 2.5rem;
+    
+    #menu ul {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
     }
-
-    .hero-content p {
-        font-size: 1.2rem;
+    
+    #content {
+        margin-left: 0;
+        padding: 20px;
     }
-
-    .section-title {
-        font-size: 2rem;
-    }
-
-    .stats {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .contact-links {
-        flex-direction: column;
-        align-items: center;
+    
+    .title {
+        padding: 10px;
     }
 }
-
-/* 平滑滚动 */
-html {
-    scroll-behavior: smooth;
-}
-
-/* 加载动画 */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.photo-card {
-    animation: fadeIn 0.5s ease-out;
-}
-
-.photo-card:nth-child(1) { animation-delay: 0.1s; }
-.photo-card:nth-child(2) { animation-delay: 0.2s; }
-.photo-card:nth-child(3) { animation-delay: 0.3s; }
-.photo-card:nth-child(4) { animation-delay: 0.4s; }
-.photo-card:nth-child(5) { animation-delay: 0.5s; }
