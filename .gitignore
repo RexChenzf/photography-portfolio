@@ -1,0 +1,8 @@
+# 忽略文件
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+
+# 图片目录（如果你本地有图片）
+# images/
