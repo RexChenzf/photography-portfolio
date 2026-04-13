@@ -31,11 +31,19 @@ function buildSlideshow() {
     });
 }
 
+function updateCounter() {
+    var counter = document.getElementById('counter');
+    if (counter) {
+        counter.textContent = (current + 1) + ' / ' + slides.length;
+    }
+}
+
 function goTo(index) {
     if (slides.length === 0) return;
     slides[current].style.display = 'none';
     current = (index + slides.length) % slides.length;
     slides[current].style.display = 'block';
+    updateCounter();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -54,5 +62,12 @@ document.addEventListener('DOMContentLoaded', function() {
         goTo(current + 1);
     });
 
+    // 键盘左右键支持
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    updateCounter();
     console.log('Chen ZhuoFeng Photography — ' + slides.length + ' photos loaded');
 });
