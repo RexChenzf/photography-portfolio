@@ -1,12 +1,12 @@
 'use strict';
 
-// 实际 images/ 目录中的文件
+/* === 由 build.py 自动生成，请勿手动修改 === */
 var images = [
     'IMG_9015 2.JPG',
     'IMG_9298 2.JPG',
     'IMG_9360 2.JPG',
     'IMG_9472 2.JPG',
-    'RIMG0014\u7684\u526f\u672c.JPG',
+    'RIMG0014的副本.JPG',
     'dji_fly_20260123_115158_724_1769140428831_photo_optimized.JPG'
 ];
 
@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
         goTo(current + 1);
     });
 
-    // 键盘左右键支持
     document.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowLeft') goTo(current - 1);
         if (e.key === 'ArrowRight') goTo(current + 1);
