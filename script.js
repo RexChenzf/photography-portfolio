@@ -2,6 +2,10 @@
 
 /* === 由 build.py 自动生成，请勿手动修改 === */
 var images = [
+    'IMG_2782.jpeg',
+    'IMG_2967.jpeg',
+    'IMG_2970.jpeg',
+    'IMG_3088.jpeg',
     'IMG_5522.jpg',
     'IMG_9015 2.JPG',
     'IMG_9298 2.JPG',
@@ -112,5 +116,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hash 路由
     switchTab(location.hash.slice(1) || 'home');
 
-    console.log('Chen ZhuoFeng Photography — 7 photos loaded');
+    console.log('Chen ZhuoFeng Photography — 11 photos loaded');
 });
