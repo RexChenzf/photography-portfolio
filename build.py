@@ -14,12 +14,14 @@ EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.heic', '.mov', '.mp4',
 def get_images():
     files = []
     if os.path.isdir(IMAGES_DIR):
-        for f in sorted(os.listdir(IMAGES_DIR)):
-            if os.path.isfile(os.path.join(IMAGES_DIR, f)):
+        for f in os.listdir(IMAGES_DIR):
+            path = os.path.join(IMAGES_DIR, f)
+            if os.path.isfile(path):
                 ext = os.path.splitext(f)[1].lower()
                 if ext in EXTENSIONS:
-                    files.append(f)
-    return files
+                    files.append((os.path.getmtime(path), f))
+    files.sort(key=lambda x: (-x[0], x[1]))  # mtime 倒序，同秒按文件名升序
+    return [f for (_, f) in files]
 
 def escape_js_string(s):
     return s.replace('\\', '\\\\').replace("'", "\\'").replace('\n', '\\n').replace('\r', '\\r')

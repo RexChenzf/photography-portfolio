@@ -2,17 +2,17 @@
 
 /* === 由 build.py 自动生成，请勿手动修改 === */
 var images = [
-    'IMG_2782.jpeg',
     'IMG_2967.jpeg',
+    'IMG_2782.jpeg',
     'IMG_2970.jpeg',
     'IMG_3088.jpeg',
     'IMG_5522.jpg',
-    'IMG_9015 2.JPG',
-    'IMG_9298 2.JPG',
-    'IMG_9360 2.JPG',
+    'dji_fly_20260123_115158_724_1769140428831_photo_optimized.JPG',
     'IMG_9472 2.JPG',
-    'RIMG0014的副本.JPG',
-    'dji_fly_20260123_115158_724_1769140428831_photo_optimized.JPG'
+    'IMG_9360 2.JPG',
+    'IMG_9298 2.JPG',
+    'IMG_9015 2.JPG',
+    'RIMG0014的副本.JPG'
 ];
 
 var current = 0;
