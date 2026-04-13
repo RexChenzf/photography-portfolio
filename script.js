@@ -47,8 +47,38 @@ function goTo(index) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    buildSlideshow();
+    // Tab 切换
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        document.querySelectorAll('#menu a[data-tab]').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        var tab = document.getElementById('tab-' + tabId);
+        var link = document.querySelector('#menu a[data-tab="' + tabId + '"]');
+        if (tab) tab.classList.add('active');
+        if (link) link.classList.add('active');
+        location.hash = tabId;
 
+        // 作品 tab 才加载幻灯片
+        if (tabId === 'gallery') {
+            if (slides.length === 0) {
+                buildSlideshow();
+                updateCounter();
+            }
+        }
+    }
+
+    // 绑定导航点击
+    document.querySelectorAll('#menu a[data-tab]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            switchTab(this.getAttribute('data-tab'));
+        });
+    });
+
+    // 幻灯片
     var prev = document.getElementById('prev');
     var next = document.getElementById('next');
 
@@ -67,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'ArrowRight') goTo(current + 1);
     });
 
-    updateCounter();
-    console.log('Chen ZhuoFeng Photography — ' + slides.length + ' photos loaded');
+    // Hash 路由（支持浏览器后退）
+    switchTab(location.hash.slice(1) || 'home');
+
+    console.log('Chen ZhuoFeng Photography — ready');
 });

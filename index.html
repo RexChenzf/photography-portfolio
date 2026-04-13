@@ -6,7 +6,6 @@
     <title>Chen ZhuoFeng - Photography</title>
     <link rel="stylesheet" href="styles.css">
     <style type="text/css">
-        /* Yan Ming 风格基础 */
         body {
             font-size: 12px;
             font-family: Arial, sans-serif;
@@ -25,21 +24,34 @@
             <p><a href=".">Chen ZhuoFeng</a></p>
         </div>
         <ul>
-            <li><a href="#home" class="active">首页</a></li>
-            <li><a href="#gallery">作品</a></li>
-            <li><a href="#about">关于</a></li>
+            <li><a href="#home" data-tab="home" class="active">首页</a></li>
+            <li><a href="#gallery" data-tab="gallery">作品</a></li>
+            <li><a href="#about" data-tab="about">关于</a></li>
         </ul>
-        <p class="links"><a href="#links">Links</a></p>
+        <p class="links"><a href="#links" data-tab="links">Links</a></p>
     </div>
-    
+
     <!-- 主内容区 -->
     <div id="content">
-        <div class="container">
+
+        <!-- 首页 -->
+        <div id="tab-home" class="tab-content active">
+            <div class="intro">
+                <h1>Chen ZhuoFeng</h1>
+                <p class="tagline">记录光影，定格瞬间</p>
+                <p class="bio-short">
+                    用镜头捕捉生活的美好，用影像讲述每一段故事。
+                </p>
+            </div>
+        </div>
+
+        <!-- 作品 -->
+        <div id="tab-gallery" class="tab-content">
+            <div class="section-title">作品</div>
             <!-- 幻灯片容器 -->
             <div id="slideshow">
                 <!-- 图片动态加载到这里 -->
             </div>
-            
             <!-- 导航按钮 -->
             <div class="slide-nav">
                 <a href="#" id="prev">‹</a>
@@ -47,8 +59,33 @@
                 <a href="#" id="next">›</a>
             </div>
         </div>
+
+        <!-- 关于 -->
+        <div id="tab-about" class="tab-content">
+            <div class="section-title">关于</div>
+            <div class="about-body">
+                <img src="images/avatar.jpg" alt="avatar" class="about-avatar" onerror="this.style.display='none'">
+                <p>
+                    热爱摄影，专注于人像、风光与纪实题材。
+                    相信每一张照片背后都有一个故事，每一束光都有它独特的语言。
+                </p>
+                <p>
+                    器材：iPhone / DJI 航拍 / 索尼微单
+                </p>
+            </div>
+        </div>
+
+        <!-- Links -->
+        <div id="tab-links" class="tab-content">
+            <div class="section-title">Links</div>
+            <ul class="link-list">
+                <li><a href="https://github.com/RexChenzf" target="_blank">GitHub</a></li>
+                <li><a href="mailto:rexchenzf@outlook.com">Email</a></li>
+            </ul>
+        </div>
+
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
