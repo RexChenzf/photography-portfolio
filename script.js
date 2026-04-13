@@ -2,6 +2,7 @@
 
 /* === 由 build.py 自动生成，请勿手动修改 === */
 var images = [
+    'IMG_5522.jpg',
     'IMG_9015 2.JPG',
     'IMG_9298 2.JPG',
     'IMG_9360 2.JPG',
@@ -16,10 +17,8 @@ var slides = [];
 function buildSlideshow() {
     var container = document.getElementById('slideshow');
     if (!container) return;
-
     container.innerHTML = '';
     slides = [];
-
     images.forEach(function(name, i) {
         var img = document.createElement('img');
         img.src = 'images/' + name;
@@ -29,6 +28,17 @@ function buildSlideshow() {
         container.appendChild(img);
         slides.push(img);
     });
+}
+
+function buildHomeFeatured() {
+    var container = document.getElementById('home-featured');
+    if (!container || images.length === 0) return;
+    container.innerHTML = '';
+    var img = document.createElement('img');
+    img.src = 'images/' + images[images.length - 1];
+    img.alt = 'Chen ZhuoFeng';
+    img.id = 'featured-img';
+    container.appendChild(img);
 }
 
 function updateCounter() {
@@ -46,31 +56,32 @@ function goTo(index) {
     updateCounter();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Tab 切换
-    function switchTab(tabId) {
-        document.querySelectorAll('.tab-content').forEach(function(el) {
-            el.classList.remove('active');
-        });
-        document.querySelectorAll('#menu a[data-tab]').forEach(function(el) {
-            el.classList.remove('active');
-        });
-        var tab = document.getElementById('tab-' + tabId);
-        var link = document.querySelector('#menu a[data-tab="' + tabId + '"]');
-        if (tab) tab.classList.add('active');
-        if (link) link.classList.add('active');
-        location.hash = tabId;
-
-        // 作品 tab 才加载幻灯片
-        if (tabId === 'gallery') {
-            if (slides.length === 0) {
-                buildSlideshow();
-                updateCounter();
-            }
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.remove('active');
+    });
+    document.querySelectorAll('#menu a[data-tab]').forEach(function(el) {
+        el.classList.remove('active');
+    });
+    var tab = document.getElementById('tab-' + tabId);
+    var link = document.querySelector('#menu a[data-tab="' + tabId + '"]');
+    if (tab) tab.classList.add('active');
+    if (link) link.classList.add('active');
+    location.hash = tabId;
+    if (tabId === 'gallery') {
+        if (slides.length === 0) {
+            buildSlideshow();
+            updateCounter();
         }
     }
+}
 
-    // 绑定导航点击
+document.addEventListener('DOMContentLoaded', function() {
+
+    // 首页封面图
+    buildHomeFeatured();
+
+    // Tab 切换
     document.querySelectorAll('#menu a[data-tab]').forEach(function(link) {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -78,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 幻灯片
+    // 幻灯片导航
     var prev = document.getElementById('prev');
     var next = document.getElementById('next');
 
@@ -92,13 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
         goTo(current + 1);
     });
 
+    // 键盘支持
     document.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowLeft') goTo(current - 1);
         if (e.key === 'ArrowRight') goTo(current + 1);
     });
 
-    // Hash 路由（支持浏览器后退）
+    // Hash 路由
     switchTab(location.hash.slice(1) || 'home');
 
-    console.log('Chen ZhuoFeng Photography — ready');
+    console.log('Chen ZhuoFeng Photography — 7 photos loaded');
 });

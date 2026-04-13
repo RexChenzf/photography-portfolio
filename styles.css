@@ -109,28 +109,33 @@ a img {
 }
 
 /* ===== 首页 ===== */
-.intro {
-    max-width: 480px;
-    padding-top: 20px;
-}
-
-.intro h1 {
-    font-size: 28px;
-    font-weight: normal;
-    color: #000;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-}
-
-.intro .tagline {
-    font-size: 14px;
-    color: #999;
+#home-featured {
+    width: 100%;
     margin-bottom: 20px;
 }
 
-.intro .bio-short {
-    line-height: 1.8;
-    color: #666;
+#featured-img {
+    width: 100%;
+    max-height: calc(100vh - 200px);
+    object-fit: contain;
+    display: block;
+}
+
+.home-caption {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.home-name {
+    font-size: 20px;
+    color: #000;
+    letter-spacing: 2px;
+}
+
+.home-desc {
+    font-size: 13px;
+    color: #999;
 }
 
 /* ===== 关于 ===== */
@@ -158,12 +163,21 @@ a img {
 }
 
 .link-list li {
-    padding: 6px 0;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.link-list li:last-child {
+    border-bottom: none;
 }
 
 .link-list li a {
-    color: #2cb4e6;
+    color: #666;
     font-size: 13px;
+}
+
+.link-list li a:hover {
+    color: #2cb4e6;
 }
 
 .container {

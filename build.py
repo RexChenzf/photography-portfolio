@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """
-build.py — 扫描 images/ 目录，生成 script.js 中的图片列表
+build.py — 扫描 images/ 目录，生成完整的 script.js
 用法: python3 build.py
 """
 import os
-import re
 
 SCRIPT_JS = 'script.js'
 IMAGES_DIR = 'images'
 
-# 支持的图片/视频格式
+# 支持的图片格式
 EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.heic', '.mov', '.mp4', '.bmp'}
 
 def get_images():
@@ -23,83 +22,125 @@ def get_images():
     return files
 
 def escape_js_string(s):
-    """转义 JS 字符串中的特殊字符"""
     return s.replace('\\', '\\\\').replace("'", "\\'").replace('\n', '\\n').replace('\r', '\\r')
 
 def generate_script(images):
-    lines = []
-    lines.append("'use strict';")
-    lines.append("")
-    lines.append("/* === 由 build.py 自动生成，请勿手动修改 === */")
-    lines.append("var images = [")
+    count = len(images)
+    esc_images = ',\n    '.join(["'" + escape_js_string(img) + "'" for img in images])
+    if count == 0:
+        esc_images = "''"
 
-    escaped = [f"    '{escape_js_string(img)}'" for img in images]
-    lines.append(',\n'.join(escaped))
+    return """'use strict';
 
-    lines.append("];")
-    lines.append("")
-    lines.append("var current = 0;")
-    lines.append("var slides = [];")
-    lines.append("")
-    lines.append("function buildSlideshow() {")
-    lines.append("    var container = document.getElementById('slideshow');")
-    lines.append("    if (!container) return;")
-    lines.append("")
-    lines.append("    container.innerHTML = '';")
-    lines.append("    slides = [];")
-    lines.append("")
-    lines.append("    images.forEach(function(name, i) {")
-    lines.append("        var img = document.createElement('img');")
-    lines.append("        img.src = 'images/' + name;")
-    lines.append("        img.alt = 'Photo ' + (i + 1);")
-    lines.append("        img.className = 'slide-img';")
-    lines.append("        img.style.display = i === 0 ? 'block' : 'none';")
-    lines.append("        container.appendChild(img);")
-    lines.append("        slides.push(img);")
-    lines.append("    });")
-    lines.append("}")
-    lines.append("")
-    lines.append("function updateCounter() {")
-    lines.append("    var counter = document.getElementById('counter');")
-    lines.append("    if (counter) {")
-    lines.append("        counter.textContent = (current + 1) + ' / ' + slides.length;")
-    lines.append("    }")
-    lines.append("}")
-    lines.append("")
-    lines.append("function goTo(index) {")
-    lines.append("    if (slides.length === 0) return;")
-    lines.append("    slides[current].style.display = 'none';")
-    lines.append("    current = (index + slides.length) % slides.length;")
-    lines.append("    slides[current].style.display = 'block';")
-    lines.append("    updateCounter();")
-    lines.append("}")
-    lines.append("")
-    lines.append("document.addEventListener('DOMContentLoaded', function() {")
-    lines.append("    buildSlideshow();")
-    lines.append("")
-    lines.append("    var prev = document.getElementById('prev');")
-    lines.append("    var next = document.getElementById('next');")
-    lines.append("")
-    lines.append("    if (prev) prev.addEventListener('click', function(e) {")
-    lines.append("        e.preventDefault();")
-    lines.append("        goTo(current - 1);")
-    lines.append("    });")
-    lines.append("")
-    lines.append("    if (next) next.addEventListener('click', function(e) {")
-    lines.append("        e.preventDefault();")
-    lines.append("        goTo(current + 1);")
-    lines.append("    });")
-    lines.append("")
-    lines.append("    document.addEventListener('keydown', function(e) {")
-    lines.append("        if (e.key === 'ArrowLeft') goTo(current - 1);")
-    lines.append("        if (e.key === 'ArrowRight') goTo(current + 1);")
-    lines.append("    });")
-    lines.append("")
-    lines.append("    updateCounter();")
-    lines.append("    console.log('Chen ZhuoFeng Photography — ' + slides.length + ' photos loaded');")
-    lines.append("});")
+/* === 由 build.py 自动生成，请勿手动修改 === */
+var images = [
+    {files}
+];
 
-    return '\n'.join(lines) + '\n'
+var current = 0;
+var slides = [];
+
+function buildSlideshow() {{
+    var container = document.getElementById('slideshow');
+    if (!container) return;
+    container.innerHTML = '';
+    slides = [];
+    images.forEach(function(name, i) {{
+        var img = document.createElement('img');
+        img.src = 'images/' + name;
+        img.alt = 'Photo ' + (i + 1);
+        img.className = 'slide-img';
+        img.style.display = i === 0 ? 'block' : 'none';
+        container.appendChild(img);
+        slides.push(img);
+    }});
+}}
+
+function buildHomeFeatured() {{
+    var container = document.getElementById('home-featured');
+    if (!container || images.length === 0) return;
+    container.innerHTML = '';
+    var img = document.createElement('img');
+    img.src = 'images/' + images[images.length - 1];
+    img.alt = 'Chen ZhuoFeng';
+    img.id = 'featured-img';
+    container.appendChild(img);
+}}
+
+function updateCounter() {{
+    var counter = document.getElementById('counter');
+    if (counter) {{
+        counter.textContent = (current + 1) + ' / ' + slides.length;
+    }}
+}}
+
+function goTo(index) {{
+    if (slides.length === 0) return;
+    slides[current].style.display = 'none';
+    current = (index + slides.length) % slides.length;
+    slides[current].style.display = 'block';
+    updateCounter();
+}}
+
+function switchTab(tabId) {{
+    document.querySelectorAll('.tab-content').forEach(function(el) {{
+        el.classList.remove('active');
+    }});
+    document.querySelectorAll('#menu a[data-tab]').forEach(function(el) {{
+        el.classList.remove('active');
+    }});
+    var tab = document.getElementById('tab-' + tabId);
+    var link = document.querySelector('#menu a[data-tab="' + tabId + '"]');
+    if (tab) tab.classList.add('active');
+    if (link) link.classList.add('active');
+    location.hash = tabId;
+    if (tabId === 'gallery') {{
+        if (slides.length === 0) {{
+            buildSlideshow();
+            updateCounter();
+        }}
+    }}
+}}
+
+document.addEventListener('DOMContentLoaded', function() {{
+
+    // 首页封面图
+    buildHomeFeatured();
+
+    // Tab 切换
+    document.querySelectorAll('#menu a[data-tab]').forEach(function(link) {{
+        link.addEventListener('click', function(e) {{
+            e.preventDefault();
+            switchTab(this.getAttribute('data-tab'));
+        }});
+    }});
+
+    // 幻灯片导航
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+
+    if (prev) prev.addEventListener('click', function(e) {{
+        e.preventDefault();
+        goTo(current - 1);
+    }});
+
+    if (next) next.addEventListener('click', function(e) {{
+        e.preventDefault();
+        goTo(current + 1);
+    }});
+
+    // 键盘支持
+    document.addEventListener('keydown', function(e) {{
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+    }});
+
+    // Hash 路由
+    switchTab(location.hash.slice(1) || 'home');
+
+    console.log('Chen ZhuoFeng Photography — {count} photos loaded');
+}});
+""".format(files=esc_images, count=count)
 
 def main():
     images = get_images()
@@ -120,7 +161,7 @@ def main():
     else:
         with open(SCRIPT_JS, 'w', encoding='utf-8') as f:
             f.write(new_content)
-        print(f"\nscript.js 已更新 ({len(images)} 个文件)。")
+        print(f"\nscript.js 已更新（{len(images)} 个文件）。")
 
 if __name__ == '__main__':
     main()
