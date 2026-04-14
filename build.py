@@ -63,7 +63,7 @@ function buildHomeFeatured() {{
     if (!container || images.length === 0) return;
     container.innerHTML = '';
     var img = document.createElement('img');
-    img.src = 'images/' + images[images.length - 1];
+    img.src = 'firstpageimage/cover.jpeg';
     img.alt = 'Chen ZhuoFeng';
     img.id = 'featured-img';
     container.appendChild(img);
